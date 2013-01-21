@@ -3,10 +3,10 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.hello-world"
         version   = "2.2.0">
-    <name>Early Childhood Made Easy</name>
+    <name>EC</name>
 
     <description>
-        Early Childhood Made Easy Application
+        Early Childhood Made Easy
     </description>
 
     <author href="http://phonegap.com" email="support@phonegap.com">
