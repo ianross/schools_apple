@@ -49,6 +49,27 @@ function onDeviceReady() {
     }
 }
 
+function checkConnection() {
+
+    if(navigator.network) {
+    var networkState = navigator.network.connection.type;
+
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown';
+    states[Connection.ETHERNET] = 'Ethernet';
+    states[Connection.WIFI]     = 'WiFi';
+    states[Connection.CELL_2G]  = '2G';
+    states[Connection.CELL_3G]  = '3G';
+    states[Connection.CELL_4G]  = '4G';
+    states[Connection.NONE]     = 'No Internet';
+
+    return states[networkState];
+
+    }
+    else {
+        return "No Internet"
+    }
+}
 
 String.prototype.trim = function() {
     return this.replace(/^\s+|\s+$/g,"");
@@ -870,63 +891,99 @@ function onNotesCheckboxClick(e) {
 
 function onSubmitReport() {
 
-    SendData = {};
-    //Get title
-    var title = $("#ReportTitle").val();
-    //Get Date
-    var date = $("#ReportDate").val();
+    if(checkConnection() !== "No Internet" && checkConnection() !== "Unknown") {
 
-    //List of images
-    var images = ReportCheckBoxesImages;
+        SendData = {};
+        //Get title
+        var title = $("#ReportTitle").val();
+        //Get Date
+        var date = $("#ReportDate").val();
 
-    //List of image captions
-    var captions = [];
+        //List of images
+        var images = ReportCheckBoxesImages;
 
-    //List of notes
-    var NOTES = ReportCheckBoxesNotes;
+        //List of image captions
+        var captions = [];
 
-    //Get email address
-    var email = document.getElementById("eInputReport").value;
-    var other = document.getElementById("TRinput").value;
+        //List of notes
+        var NOTES = ReportCheckBoxesNotes;
 
-    //Get follow up & evaluation if any
-    var followup = $("#followuptext").val();
-    var evaluation = $("#evaluationtext").val();
+        //Get email address
+        var email = document.getElementById("eInputReport").value;
+        var other = document.getElementById("TRinput").value;
 
-    //Check title / date / email
+        //Get follow up & evaluation if any
+        var followup = $("#followuptext").val();
+        var evaluation = $("#evaluationtext").val();
 
-    SendData.title = title;
-    SendData.date = date;
-    SendData.images = images.length;
-    SendData.captions = ReportCheckBoxesCaption;
-    SendData.notes = NOTES;
-    SendData.email = email;
-    SendData.cc = other;
-    SendData.followupexperience = followup;
-    SendData.evaluation = evaluation;
-    SendData.type = ReportType;
-    SendData.imageData = images.slice(0);
-    SendData.captionData = ReportCheckBoxesCaption.slice(0);
-    SendData.Background = SelectedBackground;
-    SendData.Font = SelectedFont;
-    SendData.FontColour = SelectedFontColour;
-    SendData.principles = SelectedPrinciples;
-    SendData.practices = SelectedPractices;
+        //Check title / date / email
 
-    SendData.uuid = device.uuid;
-    SendData.template = ReportTemplate;
+        SendData.title = title;
+        SendData.date = date;
+        SendData.images = images.length;
+        SendData.captions = ReportCheckBoxesCaption;
+        SendData.notes = NOTES;
+        SendData.email = email;
+        SendData.cc = other;
+        SendData.followupexperience = followup;
+        SendData.evaluation = evaluation;
+        SendData.type = ReportType;
+        SendData.imageData = images.slice(0);
+        SendData.captionData = ReportCheckBoxesCaption.slice(0);
+        SendData.Background = SelectedBackground;
+        SendData.Font = SelectedFont;
+        SendData.FontColour = SelectedFontColour;
+        SendData.principles = SelectedPrinciples;
+        SendData.practices = SelectedPractices;
 
-    if(SendData.email == "" || SendData.email == null || validateEmail(SendData.email) == false) {
-        alert("Must enter a valid email");
-    }
-    else {
-        if(SendData.title == "" || SendData.title == null) { alert("Must enter a title for the report");}
+        SendData.uuid = device.uuid;
+        SendData.template = ReportTemplate;
+
+        if(SendData.email == "" || SendData.email == null || validateEmail(SendData.email) == false) {
+            navigator.notification.alert(
+                    'Must enter a valid email',  // message
+                    function() {},         // callback
+                    'Invalid Email',            // title
+                    'Close'                  // buttonName
+            );
+            //alert("Must enter a valid email");
+        }
         else {
-            if(SendData.date == "" || SendData.date == null) {alert("Must enter a date for the report")}
+            if(SendData.title == "" || SendData.title == null) {
+                navigator.notification.alert(
+                        'Must enter a title for the report',  // message
+                        function() {},         // callback
+                        'No Report Title',            // title
+                        'Close'                  // buttonName
+                );
+                //alert("Must enter a title for the report");
+            }
             else {
-                PrepData();
+                if(SendData.date == "" || SendData.date == null) {
+                    navigator.notification.alert(
+                            'Must enter a date for the report',  // message
+                            function() {},         // callback
+                            'No Report Date',            // title
+                            'Close'                  // buttonName
+                    );
+                    //alert("Must enter a date for the report")
+                }
+                else {
+                    PrepData();
+                }
             }
         }
+
+    }
+
+    else {
+        navigator.notification.alert(
+                'No Internet Connection',  // message
+                function() {},         // callback
+                'Internet Connection Failure',            // title
+                'Close'                  // buttonName
+        );
+        //alert("No Internet Connection");
     }
 
 
@@ -1075,6 +1132,7 @@ function PracticesCheck(e) {
 
     <div data-role="header" data-theme="e">
         <h1 style="white-space:normal">Early Childhood Made Easy</h1>
+        <a id="data-connection" data-icon="gear" class="ui-btn-right"></a>
     </div>
 
     <div id="MainWindow" data-role="content">
@@ -2008,6 +2066,19 @@ function PracticesCheck(e) {
         */
 
         $.mobile.hidePageLoadingMsg();
+    });
+
+    $('#one').bind('pagebeforeshow', function() {
+
+       var holder = $("#data-connection")[0].childNodes[0];
+
+        for (var i = 0; i < holder.childNodes.length; i++) {
+            if (holder.childNodes[i].className == "ui-btn-text") {
+                $(holder.childNodes[i]).text(checkConnection());
+                break;
+            }
+        }
+
     });
 
     $('#ReportFill').bind('pagebeforeshow', function() {
