@@ -201,14 +201,21 @@ function TryUploadData() {
         cache: false,
         success: function(response, status, obj){
             uploadPhotoCB();
-            alert("Report Submitted");
-            if(ReportTerm == 0 || ReportTerm == "Other" ) {
+            navigator.notification.alert(
+                'Report Submitted',  // message
+                function() {
+                    if(ReportTerm == 0 || ReportTerm == "Other" ) {
 
-            }
-            else {
-                CallbackData = 1;
-                UpdateStudentTermCB(CurrentStudent.name)
-            }
+                    }
+                    else {
+                        CallbackData = 1;
+                        UpdateStudentTermCB(CurrentStudent.name);
+                    }
+                },         // callback
+                'Report Successfully Submitted',            // title
+                'Close'                  // buttonName
+            );
+            //alert("Report Submitted");
         },
         error: function(obj) {
             uploadPhotoCB();
@@ -218,7 +225,13 @@ function TryUploadData() {
 
 function UploadImageFail() {
     uploadPhotoCB();
-    alert("Image could not be uploaded. Please ensure you have an active internet connection");
+    navigator.notification.alert(
+        'Image could not be uploaded. Please ensure you have an active internet connection',  // message
+        function() {},         // callback
+        'Image Upload Failed',            // title
+        'Close'                  // buttonName
+    );
+    //alert("Image could not be uploaded. Please ensure you have an active internet connection");
 }
 
 function UploadImageSuccess(r) {

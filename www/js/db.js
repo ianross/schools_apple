@@ -53,8 +53,14 @@ var SendData = {};
 var CaptionLoading = false;
 
 function errorHandler(transaction, error) {
-    alert('Error: ' + error.message + ' code: ' + error.code);
 
+    navigator.notification.alert(
+        'Error: ' + error.message + ' code: ' + error.code,  // message
+        function() {},         // callback
+        'Database Error',            // title
+        'Close'                  // buttonName
+    );
+    //alert('Error: ' + error.message + ' code: ' + error.code);
 }
 
 //Used for debugging...
@@ -84,7 +90,13 @@ function nullHandler(){
 };
 
 function addSuccess(){
-    alert("Child Successfully Added to Class");
+    navigator.notification.alert(
+        'Child Successfully Added to Class',  // message
+        function() {},         // callback
+        'Child Added',            // title
+        'Close'                  // buttonName
+    );
+    //alert("Child Successfully Added to Class");
     Students.push({name: CallbackData[0], images: [], notes: [], TermOne: 0, TermTwo: 0, TermThree: 0, TermFour: 0, Parent: CallbackData[1]});
     $('#list').append('<li style="text-align:center" data-theme="c" class="ui-li ui-li-static ui-body-c">' + CallbackData + '</li>');
     Application.UpdateAllContent();
@@ -92,8 +104,13 @@ function addSuccess(){
 };
 
 function updateEmailSuccess(){
-
-    alert("Email Address Successfully Updated");
+    navigator.notification.alert(
+        'Email Address Successfully Updated',  // message
+        function() {},         // callback
+        'Email Updated',            // title
+        'Close'                  // buttonName
+    );
+    //alert("Email Address Successfully Updated");
 
     Globals.teacher = CallbackData;
     Application.UpdateAllContent();
@@ -105,8 +122,13 @@ function updateEmailSuccess(){
 };
 
 function addTeacherSuccess(){
-
-    alert("Teacher's Email Address Successfully Updated");
+    navigator.notification.alert(
+        'Email Address Successfully Updated',  // message
+        function() {},         // callback
+        'Email Updated',            // title
+        'Close'                  // buttonName
+    );
+    //alert("Teacher's Email Address Successfully Updated");
     Application.UpdateAllContent();
     CallbackData = null;
 
@@ -115,7 +137,13 @@ function addTeacherSuccess(){
 
 
 function updateSuccess(){
-    alert("Child Information Successfully Updated")
+    navigator.notification.alert(
+        'Child Information Successfully Updated',  // message
+        function() {},         // callback
+        'Child Information Updated',            // title
+        'Close'                  // buttonName
+    );
+    //alert("Child Information Successfully Updated")
     CurrentStudent.name = CallbackData;
     Application.UpdateAllContent();
     CallbackData = null;
@@ -136,7 +164,13 @@ function updateImageDeleteSuccess() {
 }
 
 function updateNotesSuccess() {
-    alert("Child Notes Successfully Updated");
+    navigator.notification.alert(
+        'Child Notes Successfully Updated',  // message
+        function() {},         // callback
+        'Child Notes Updated',            // title
+        'Close'                  // buttonName
+    );
+    //alert("Child Notes Successfully Updated");
     CurrentStudent.notes.push(CallbackData);
     Application.UpdateStudentNotes();
     CallbackData = null;
@@ -214,7 +248,13 @@ function StartDB() {
     if (!window.openDatabase) {
         // not all mobile devices support databases  if it does not, the following alert will display
         // indicating the device will not be albe to run this application
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser.',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -231,7 +271,13 @@ function StartDB() {
 function ListDBValues() {
 
     if(!window.openDatabase) {
-        alert('Databasesa re not supported in this browser');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser');
         return;
     }
 
@@ -268,7 +314,13 @@ function AddTeacherEmail(email) {
     var updateStatement = "UPDATE Teacher SET Email = ? WHERE PrimaryKey = 1";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -284,7 +336,13 @@ function AddTeacherEmail(email) {
 function AddValueToDB(name, images, notes,email) {
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -300,7 +358,13 @@ function AddValueToDB(name, images, notes,email) {
 function RemoveStudentFromDB(name) {
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -318,7 +382,13 @@ function UpdateStudentInDB(cName,nName, images, notes) {
     var updateStatement = "UPDATE Students SET StudentName = ?, Images = ?, Notes = ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -337,7 +407,13 @@ function UpdateStudentImagesInDB(cName, images, notes) {
     var updateStatement = "UPDATE Students SET StudentName = ?, Images = ?, Notes = ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -356,7 +432,13 @@ function UpdateStudentNotesInDB(cName, images, notes) {
     var updateStatement = "UPDATE Students SET StudentName = ?, Images = ?, Notes = ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -374,7 +456,13 @@ function UpdateStudentImagesCustomCallbackInDB(cName, images, callback) {
     var updateStatement = "UPDATE Students SET Images = ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -392,7 +480,13 @@ function UpdateStudentCustomCallbackInDB(cName, images, notes, callback) {
     var updateStatement = "UPDATE Students SET StudentName = ?, Images = ?, Notes = ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -409,7 +503,13 @@ function UpdateStudentTermCB(cName) {
     var updateStatement = "UPDATE Students SET " + ReportTerm + "= ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -424,7 +524,13 @@ function ClearTerms() {
     var updateStatement = "UPDATE Students SET " + ReportTerm + "= ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 
@@ -440,7 +546,13 @@ function UpdateStudentParentEmail(email, cName) {
     var updateStatement = "UPDATE Students SET Parent = ? WHERE StudentName = ?";
 
     if (!window.openDatabase) {
-        alert('Databases are not supported in this browser.');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databases are not supported in this browser.');
         return;
     }
 

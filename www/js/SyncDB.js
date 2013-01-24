@@ -15,7 +15,13 @@
 function SyncDB() {
 
     if(!window.openDatabase) {
-        alert('Databasesa re not supported in this browser');
+        navigator.notification.alert(
+            'Databases are not supported in this browser',  // message
+            function() {},         // callback
+            'Database Error',            // title
+            'Close'                  // buttonName
+        );
+        //alert('Databasesa re not supported in this browser');
         return;
     }
 
