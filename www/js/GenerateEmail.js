@@ -131,7 +131,7 @@ Email.prototype.GenerateEmail = function(template) {
                 '<meta charset="utf-8"> ' +
                     '<title>Learning Story</title> ' +
                 '</head> ' +
-                '<body>' +
+                '<body><style type="text/css">#floats{float:left;}</style>' +
                     '<div style="width:600px;font-family:'+ this.font +';color:'+ this.fontcolour +';background-color:'+ this.background +';border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 2px solid #E8EDFF;display:table"> ' +
                         '<!-- Title Banner --> ' +
                         '<div style="width:600px;height:60px;float:left;color:black;text-align:center;">'+
@@ -150,84 +150,84 @@ Email.prototype.GenerateEmail = function(template) {
     }
 
     if(this.images == 1) {
-        this.EmailString+='<div style="width:600px;height:200px;float:left;">' +
-            '<div style="border:none;margin-left:200px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
+        this.EmailString+='<div id="floats" style="width:600px;height:200px;float:left;">' +
+            '<div id="floats" style="border:none;margin-left:200px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
             '</div>';
 
-        this.EmailString+='<div style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
-            '<div style="width:193px;margin-left:200px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] + '</div>'+
+        this.EmailString+='<div id="floats" style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
+            '<div id="floats" style="width:193px;margin-left:200px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] + '</div>'+
         '</div>';
     }
 
     if(this.images == 2) {
-        this.EmailString+='<div style="width:600px;height:200px;float:left;">' +
-            '<div style="border:none;margin-right:10px; margin-left:105px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
-            '<div style="border:none;float:left;"><img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
+        this.EmailString+='<div id="floats" style="width:600px;height:200px;float:left;">' +
+            '<div id="floats" style="border:none;margin-right:10px; margin-left:105px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
+            '<div id="floats" style="border:none;float:left;"><img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
             '</div>';
 
-        this.EmailString+='<div style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
-            '<div style="width:193px;margin-left:105px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] +'</div>'+
-            '<div style="width:193px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[1] +'</div>'+
+        this.EmailString+='<div id="floats" style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
+            '<div id="floats" style="width:193px;margin-left:105px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] +'</div>'+
+            '<div id="floats" style="width:193px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[1] +'</div>'+
             '</div>';
     }
 
     if(this.images == 3) {
-        this.EmailString+='<div style="width:600px;height:200px;float:left;">' +
-            '<div style="border:none;margin-right:10px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
-            '<div style="border:none;margin-right:10px;float:left;"><img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
-            '<div style="border:none;float:left;"><img src="cid:3.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
+        this.EmailString+='<div id="floats" style="width:600px;height:200px;float:left;">' +
+            '<div id="floats" style="border:none;margin-right:10px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
+            '<div id="floats" style="border:none;margin-right:10px;float:left;"><img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
+            '<div id="floats" style="border:none;float:left;"><img src="cid:3.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
         '</div>';
 
-        this.EmailString+='<div style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
-            '<div style="width:193px;margin-right:10px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] +'</div>'+
-            '<div style="width:193px;margin-right:10px;float:left;text-align:center;font-style:italic;font-size:10px;">'+ this.captions[1] +'</div>'+
-            '<div style="width:193px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[2] +'</div>'+
+        this.EmailString+='<div id="floats" style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
+            '<div id="floats" style="width:193px;margin-right:10px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] +'</div>'+
+            '<div id="floats" style="width:193px;margin-right:10px;float:left;text-align:center;font-style:italic;font-size:10px;">'+ this.captions[1] +'</div>'+
+            '<div id="floats" style="width:193px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[2] +'</div>'+
             '</div>';
     }
 
-    this.EmailString+= '<div style="width:600px;float:left;">';
+    this.EmailString+= '<div id="floats" style="width:600px;float:left;">';
 
     if(template == "A") {
 
         var width = 193;
         if(this.fnotes != "") {
-            this.EmailString+='<div style="width:193px;float:left;margin-right:10px;">'+
+            this.EmailString+='<div id="floats" style="width:193px;float:left;margin-right:10px;">'+
                 '<p style="text-align:center;font-weight:bold">Observations</p>'+
                 '<ul style="font-size:12px">'+ this.fnotes +'</ul></div>';
         }
         else {
             width= 295;
         }
-        this.EmailString+='<div style="width:'+ width +'px;float:left;margin-left:5px;">'+
+        this.EmailString+='<div id="floats" style="width:'+ width +'px;float:left;margin-left:5px;">'+
             '<p style="text-align:center;font-weight:bold">Evaluation</p>'+
             '<p style="font-size:12px">'+ this.evaluation +'</p>'+
             '<p style="text-align:center;font-weight:bold">Follow-Up Experience</p>'+
             '<p style="font-size:12px">'+ this.follow +'</p>' +
             '</div>';
 
-        this.EmailString+='<div style="width:'+ width +'px;float:left;margin:0px 0px 0px 0px;">'+
+        this.EmailString+='<div id="floats" style="width:'+ width +'px;float:left;margin:0px 0px 0px 0px;">'+
             '<p style="text-align:center;font-weight:bold">Learning Outcomes</p>'+
             '<ul style="font-size:12px">'+ this.fstring +'</ul></div>';
     }
 
     else {
-        this.EmailString+='<div style="width:600px;float:left;margin-bottom:10px;"></div>';
+        this.EmailString+='<div id="floats" style="width:600px;float:left;margin-bottom:10px;"></div>';
         if(this.fnotes != "") {
-            this.EmailString+='<div style="width:600px;float:left;margin-bottom:10px;">'+
+            this.EmailString+='<div id="floats" style="width:600px;float:left;margin-bottom:10px;">'+
                 '<p style="text-align:center;font-weight:bold">Observations</p>'+
                 '<ul style="font-size:12px">'+ this.fnotes +'</ul></div>';
         }
-        this.EmailString+='<div style="width:600px;float:left;margin-bottom:10px;">'+
+        this.EmailString+='<div id="floats" style="width:600px;float:left;margin-bottom:10px;">'+
             '<p style="text-align:center;font-weight:bold">Evaluation</p>'+
             '<p style="font-size:12px">'+ this.evaluation +'</p>'+
             '</div>';
 
-        this.EmailString+='<div style="width:600px;float:left;margin-bottom:10px;">'+
+        this.EmailString+='<div id="floats" style="width:600px;float:left;margin-bottom:10px;">'+
             '<p style="text-align:center;font-weight:bold">Follow-Up Experience</p>'+
             '<p style="font-size:12px">'+ this.follow +'</p>'
         '</div>';
 
-        this.EmailString+='<div style="width:600px;float:left;margin-bottom:10px;">'+
+        this.EmailString+='<div id="floats" style="width:600px;float:left;margin-bottom:10px;">'+
             '<p style="text-align:center;font-weight:bold">Learning Outcomes</p>'+
             '<ul style="font-size:12px">'+ this.fstring +'</ul></div>';
     }
@@ -236,7 +236,7 @@ Email.prototype.GenerateEmail = function(template) {
 
     if(this.principles.length > 0 || this.practices.length > 0) {
 
-        this.EmailString+= '<!-- Principles & Practices --><div style="width:600px;float:left;">';
+        this.EmailString+= '<!-- Principles & Practices --><div id="floats" style="width:600px;float:left;">';
 
         //Add Blurb
         this.EmailString+='<p style="text-align:left;font-style:italic">'+this.blurb+'</p>'

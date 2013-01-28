@@ -1305,7 +1305,7 @@ function PracticesCheck(e) {
         </div>
 
         <div class="ui-grid-solo">
-            <input id="Einput" type="text" name="name" id="basic" value=""  placeholder="Parent's Email" />
+            <input id="Einput" type="email" name="name" id="basic" value=""  placeholder="Parent's Email" />
         </div>
 
         <div class="ui-grid-solo" style="margin-top:30px">
@@ -1386,7 +1386,7 @@ function PracticesCheck(e) {
         <div data-role="collapsible" data-collapsed = "true" data-theme = "d">
             <h3>Update Parent's Email</h3>
             <fieldset class="ui-grid-a" style="">
-                <div class="ui-block-a"> <input id="UEinput" type="text" name="name" id="basic" value=""  placeholder="Parent's Email" /></div>
+                <div class="ui-block-a"> <input id="UEinput" type="email" name="name" id="basic" value=""  placeholder="Parent's Email" /></div>
                 <div class="ui-block-b"> <a style="margin-top:10px" onclick="UpdateEmail()" data-mini="true" data-role="button" data-icon="check" data-inline="true" data-theme = "i">Update</a></div>
 
             </fieldset>
@@ -1439,7 +1439,7 @@ function PracticesCheck(e) {
 
 
         <fieldset class="ui-grid-a" style="">
-            <div class="ui-block-a"> <input id="Tinput" type="text" name="name" id="basic" value=""  placeholder="Teacher's Email" /></div>
+            <div class="ui-block-a"> <input id="Tinput" type="email" name="name" id="basic" value=""  placeholder="Teacher's Email" /></div>
             <div class="ui-block-b"> <a style="margin-top:10px" onclick="UpdateTeacherEmail()" data-theme="i" data-mini="true" data-role="button" data-icon="check" data-inline="true">Update</a></div>
         </fieldset>
 
@@ -1872,12 +1872,12 @@ function PracticesCheck(e) {
 
 
 <div class="ui-grid-solo" style="margin-top:10px">
-    <div class="ui-block-a"><input id="eInputReport" type="text" name="" id="name" value="" placeholder="Recipient Email"/></div>
+    <div class="ui-block-a"><input id="eInputReport" type="email" name="" id="name" value="" placeholder="Recipient Email"/></div>
 </div>
 
 
 <div class="ui-grid-solo" style="margin-top:10px">
-    <div class="ui-block-a"><input id="TRinput" type="text" name="" id="name" value="" placeholder="Other Recipient Email"/></div>
+    <div class="ui-block-a"><input id="TRinput" type="email" name="" id="name" value="" placeholder="Other Recipient Email"/></div>
 </div>
 
 <div class="ui-grid-a" >
@@ -2148,10 +2148,10 @@ function PracticesCheck(e) {
 
     $('#ReportFill').bind('pagebeforeshow', function() {
         $.mobile.showPageLoadingMsg();
+        $("#TRinput").val(Globals.teacher);
     });
 
     $('#ReportFill').bind('pagebeforehide', function() {
-
     });
 
     $('#four').bind('pageinit', function() {
