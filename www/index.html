@@ -8,7 +8,7 @@
     <link rel="stylesheet"  href="css/themes/default/jquery.mobile.structure-1.1.1.min.css" />
     <link rel="stylesheet"  href="css/themes/default/summer.css" />
     <script src="js/jquery.js"></script>
-    <script src="js/jquery.mobile-1.1.1.min.js"></script>
+    <script src="js/jquery.mobile-1.1.1.js"></script>
 
     <style>
         .center-wrapper {
@@ -864,6 +864,21 @@ function onImagesCheckboxClick(e) {
     }
 }
 
+function alignImagesCaptions() {
+    //Rebuild Captions array...
+    var listImages = $("div[id^='ListImage']");
+
+    ReportCheckBoxesImages = [];
+    ReportCheckBoxesCaption = [];
+
+    for(var i = 0; i<listImages.length; i++) {
+        if(listImages[i].getAttribute("checked") == "true") {
+            ReportCheckBoxesImages.push(listImages[i].getAttribute("link"));
+            ReportCheckBoxesCaption.push(listImages[i].getAttribute("caption"));
+        }
+    }
+}
+
 function GenerateReportNotes() {
     if(CurrentStudent.name != "No Student Selected") {
         ReportCheckBoxesNotes = [];
@@ -927,6 +942,8 @@ function onSubmitReport() {
         var title = $("#ReportTitle").val();
         //Get Date
         var date = $("#ReportDate").val();
+
+        alignImagesCaptions();
 
         //List of images
         var images = ReportCheckBoxesImages;
@@ -1843,6 +1860,7 @@ function PracticesCheck(e) {
 
 <div data-role="collapsible" data-collapsed = "true" data-theme = "h">
     <h3>Style Options</h3>
+
     <div data-role="set">
         <a href="#choosefont" data-role="button" data-rel="dialog" data-transition="pop" style="font-weight: bold;">Choose Font</a>
         <a href="#choosefontcolour" data-role="button" data-rel="dialog" data-transition="pop" style="font-weight: bold;">Choose Font Colour</a>
@@ -1883,9 +1901,8 @@ function PracticesCheck(e) {
         <ul id="outcomelist" data-role="listview" data-theme="c">
         </ul>
 
-        <div class="ui-grid-b" style="margin-top:30px">
-            <div class="ui-block-a"></div>
-            <div class="ui-block-b"><a href="#" data-rel="back" data-role="button" data-theme="i">Back</a></div>
+        <div class="ui-grid-solo" style="margin-top:30px;text-align:center">
+            <a href="#" data-rel="back" data-role="button" data-theme="i">Back</a>
         </div><!-- /grid-b -->
 
     </div><!-- /content -->
@@ -1924,22 +1941,30 @@ function PracticesCheck(e) {
     <div data-role="content">
 
         <div class="ui-grid-solo">
-            <ul data-role="listview" data-theme="i">
+            <ul data-role="listview" data-theme="i" style="margin-top:5px">
                 <li style="cursor:pointer" onclick="SelectedFont = 'A'; document.getElementById('fontClose').click();">
-                    <h3 style="font-family:cursive">Cursive</h3>
-                    <p style="font-family:cursive">Click here to select this font</p>
+                    <a>
+                        <h3 style="font-family:cursive">Cursive</h3>
+                        <p style="font-family:cursive">Click here to select this font</p>
+                    </a>
                 </li>
                 <li style="cursor:pointer" onclick="SelectedFont = 'B';document.getElementById('fontClose').click();">
+                    <a>
                     <h3 style="font-family:fantasy">Fantasy</h3>
                     <p style="font-family:fantasy">Click here to select this font</p>
+                    </a>
                 </li>
                 <li style="cursor:pointer" onclick="SelectedFont = 'C';document.getElementById('fontClose').click();">
+                    <a>
                     <h3 style="font-family:helvetica">Helvetica</h3>
                     <p style="font-family:helvetica">Click here to select this font</p>
+                    </a>
                 </li>
                 <li style="cursor:pointer" onclick="SelectedFont = 'D';document.getElementById('fontClose').click();">
+                    <a>
                     <h3 style="font-family:palatino">Palatino</h3>
                     <p style="font-family:palatino">Click here to select this font</p>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -1957,21 +1982,31 @@ function PracticesCheck(e) {
         <h1>Choose Font Colour</h1>
     </div>
 
+    <div class="ui-grid-solo" style="text-align:center; margin-bottom:5px; margin-top:15px; ">
+        <span style="text-align: center; font-size:10px; font-style:italic">Please do not select a Font Colour identical to your Background Colour</span>
+    </div>
+
     <div data-role="content">
 
         <div class="ui-grid-solo">
-            <ul data-role="listview" data-theme="i">
+            <ul data-role="listview" data-theme="i" style="margin-top:5px">
                 <li style="cursor:pointer" onclick="SelectedFontColour = 'A';document.getElementById('colourClose').click();">
-                    <h3 style="color:black">Black</h3>
-                    <p>Click here to select this font colour</p>
+                    <a>
+                        <h3 style="color:black">Black</h3>
+                        <p>Click here to select this font colour</p>
+                    </a>
                 </li>
                 <li style="cursor:pointer" onclick="SelectedFontColour = 'B';document.getElementById('colourClose').click();">
-                    <h3 style="color:black">White</h3>
-                    <p>Click here to select this font colour</p>
+                    <a>
+                        <h3 style="color:black">White</h3>
+                        <p>Click here to select this font colour</p>
+                    </a>
                 </li>
                 <li style="cursor:pointer" onclick="SelectedFontColour = 'C';document.getElementById('colourClose').click();">
-                    <h3 style="color:blue">Blue</h3>
-                    <p>Click here to select this font colour</p>
+                    <a>
+                        <h3 style="color:#00008B">Blue</h3>
+                        <p>Click here to select this font colour</p>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -1991,29 +2026,43 @@ function PracticesCheck(e) {
         <h1>Choose Background</h1>
     </div>
 
+    <div class="ui-grid-solo" style="text-align:center; margin-top:15px; margin-bottom:5px">
+        <span style="text-align: center; font-size:10px; font-style:italic">Please do not select a Background Colour identical to your Font Colour</span>
+    </div>
+
     <div data-role="content">
 
         <div class="ui-grid-solo">
-            <ul data-role="listview" data-theme="i">
+            <ul data-role="listview" data-theme="i" style="margin-top:5px">
                 <li onclick="SelectedBackground = 'A';document.getElementById('bgClose').click();">
-                    <h3>Light Green</h3>
-                    <p>Click to Choose</p>
+                    <a>
+                        <h3>Light Green</h3>
+                        <p>Click to Choose</p>
+                    </a>
                 </li>
                 <li onclick="SelectedBackground = 'B';document.getElementById('bgClose').click();">
-                    <h3>Slate Gray</h3>
-                    <p>Click to Choose</p>
+                    <a>
+                        <h3>Slate Gray</h3>
+                        <p>Click to Choose</p>
+                    </a>
                 </li>
                 <li onclick="SelectedBackground = 'C';document.getElementById('bgClose').click();">
-                    <h3>Teal</h3>
-                    <p>Click to Choose</p>
+                    <a>
+                        <h3>Teal</h3>
+                        <p>Click to Choose</p>
+                    </a>
                 </li>
                 <li onclick="SelectedBackground = 'D';document.getElementById('bgClose').click();">
-                    <h3>Light Blue</h3>
-                    <p>Click to Choose</p>
+                    <a>
+                        <h3>Light Blue</h3>
+                        <p>Click to Choose</p>
+                    </a>
                 </li>
                 <li onclick="SelectedBackground = 'E';document.getElementById('bgClose').click();">
-                    <h3>No Background</h3>
-                    <p>Click to Choose</p>
+                    <a>
+                        <h3>No Background</h3>
+                        <p>Click to Choose</p>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -2092,6 +2141,7 @@ function PracticesCheck(e) {
 
         $.mobile.hidePageLoadingMsg();
         var holder = $("#data-connection").text(checkConnection());
+        $("#TRinput").val(Globals.teacher);
 
     });
 
