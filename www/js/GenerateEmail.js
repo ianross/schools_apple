@@ -131,7 +131,7 @@ Email.prototype.GenerateEmail = function(template) {
                 '<meta charset="utf-8"> ' +
                     '<title>Learning Story</title> ' +
                 '</head> ' +
-                '<body><style type="text/css">#floats{float:left;} .plzfloat { float:left; }</style>' +
+                '<body>' +
                     '<div style="width:600px;font-family:'+ this.font +';color:'+ this.fontcolour +';background-color:'+ this.background +';border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 2px solid #E8EDFF;display:table"> ' +
                         '<!-- Title Banner --> ' +
                         '<div id="floats" class="plzfloat" style="width:600px;height:60px;float:left;color:black;text-align:center;">'+
@@ -150,64 +150,102 @@ Email.prototype.GenerateEmail = function(template) {
     }
 
     if(this.images == 1) {
-        this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;height:200px;float:left;">' +
-            '<div id="floats" style="border:none;margin-left:200px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
-            '</div>';
+        this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;height:200px;float:left;margin-bottom:10px;">' +
+            '<table width="100%">' +
+                '<tr valign="top">' +
+                    '<td width="100%" colspan="1" align="center">' +
+                    '<img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '</td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>';
 
         this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
-            '<div id="floats" class="plzfloat" style="width:193px;margin-left:200px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] + '</div>'+
+            '<table width="100%" style="font-style:italic; font-size:10px">' +
+                '<tr valign="top">' +
+                    '<td width="100%" colspan="1" align="center">'+ this.captions[0] + '</td>' +
+                '</tr>' +
+            '</table>' +
         '</div>';
     }
 
     if(this.images == 2) {
-        this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;height:200px;float:left;">' +
-            '<div id="floats" class="plzfloat" style="border:none;margin-right:10px; margin-left:105px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
-            '<div id="floats" class="plzfloat" style="border:none;float:left;"><img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;"></div>' +
-            '</div>';
+        this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;height:200px;float:left;margin-bottom:10px">' +
+            '<table width="100%">' +
+                '<tr valign="top">' +
+                    '<td width="50%" colspan="1" align="center">' +
+                        '<img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '</td>' +
+                    '<td width="50%" colspan="1" align="center">' +
+                        '<img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '</td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>';
 
         this.EmailString+='<div class="plzfloat" id="floats" style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
-            '<div id="floats" class="plzfloat" style="width:193px;margin-left:105px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] +'</div>'+
-            '<div id="floats" class="plzfloat" style="width:193px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[1] +'</div>'+
-            '</div>';
+            '<table width="100%" style="font-style:italic; font-size:10px">' +
+                '<tr valign="top">' +
+                    '<td width="50%" colspan="1" align="center">'+ this.captions[0] + '</td>' +
+                    '<td width="50%" colspan="1" align="center">'+ this.captions[1] + '</td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>';
     }
 
     if(this.images == 3) {
-        this.EmailString+='<div class="plzfloat" id="floats" style="width:600px;height:200px;float:left;">' +
-            '<div id="floats" class="plzfloat" style="border:none;margin-right:10px;float:left;"><img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
-            '<div id="floats" class="plzfloat" style="border:none;margin-right:10px;float:left;"><img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
-            '<div id="floats" class="plzfloat" style="border:none;float:left;"><img src="cid:3.jpg" width="193" height="200" style="border:none;float:left;"></div>'+
+        this.EmailString+='<div class="plzfloat" id="floats" style="width:600px;height:200px;float:left;margin-bottom:10px">' +
+            '<table width="100%">' +
+                '<tr valign="top">' +
+                    '<td width="30%" colspan="1" align="center">' +
+                        '<img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '</td>' +
+                    '<td width="30%" colspan="1" align="center">' +
+                        '<img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '</td>' +
+                    '<td width="30%" colspan="1" align="center">' +
+                        '<img src="cid:3.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '</td>' +
+                '</tr>' +
+            '</table>' +
         '</div>';
 
         this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;height:20px;float:left;margin-bottom:10px;">'+
-            '<div id="floats" class="plzfloat" style="width:193px;margin-right:10px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[0] +'</div>'+
-            '<div id="floats" class="plzfloat" style="width:193px;margin-right:10px;float:left;text-align:center;font-style:italic;font-size:10px;">'+ this.captions[1] +'</div>'+
-            '<div id="floats" class="plzfloat" style="width:193px;float:left;text-align:center;font-style:italic;font-size:10px">'+ this.captions[2] +'</div>'+
-            '</div>';
+            '<table width="100%" style="font-style:italic; font-size:10px">' +
+                '<tr valign="top">' +
+                    '<td width="30%" colspan="1" align="center">'+ this.captions[0] + '</td>' +
+                    '<td width="30%" colspan="1" align="center">'+ this.captions[1] + '</td>' +
+                    '<td width="30%" colspan="1" align="center">'+ this.captions[2] + '</td>' +
+                '</tr>' +
+            '</table>' +
+        '</div>';
     }
 
-    this.EmailString+= '<div id="floats" class="plzfloat" style="width:600px;float:left;">';
+    this.EmailString+= '<div id="floats" class="plzfloat" style="width:600px;float:left;margin-bottom:10px">';
 
     if(template == "A") {
 
-        var width = 193;
+        this.EmailString+='<table width="100%"><tr valign="top">';
+
+        var width = 30;
         if(this.fnotes != "") {
-            this.EmailString+='<div id="floats" class="plzfloat" style="width:193px;float:left;margin-right:10px;">'+
+            this.EmailString+='<th width="30%" colspan="1" align="center">Observations</th><th width="30%" colspan="1" align="center">Evaluation</th><th width="30%" colspan="1" align="center">Learning Outcomes</th></tr><tr valign="top">';
+            this.EmailString+='<td width="30%" colspan="1" align="">'+
                 '<p style="text-align:center;font-weight:bold">Observations</p>'+
-                '<ul style="font-size:12px">'+ this.fnotes +'</ul></div>';
+                '<ul style="font-size:12px">'+ this.fnotes +'</ul></td>';
         }
         else {
-            width= 295;
+            this.EmailString+='<th width="50%" colspan="1" align="center">Evaluation</th><th width="50%" colspan="1" align="center">Learning Outcomes</th><tr valign="top">';
+            width = 50;
         }
-        this.EmailString+='<div id="floats" class="plzfloat" style="width:'+ width +'px;float:left;margin-left:5px;">'+
-            '<p style="text-align:center;font-weight:bold">Evaluation</p>'+
+        this.EmailString+='<td width="'+ width +'%;">'+
             '<p style="font-size:12px">'+ this.evaluation +'</p>'+
             '<p style="text-align:center;font-weight:bold">Follow-Up Experience</p>'+
             '<p style="font-size:12px">'+ this.follow +'</p>' +
-            '</div>';
+            '</td>';
 
-        this.EmailString+='<div id="floats" class="plzfloat" style="width:'+ width +'px;float:left;margin:0px 0px 0px 0px;">'+
-            '<p style="text-align:center;font-weight:bold">Learning Outcomes</p>'+
-            '<ul style="font-size:12px">'+ this.fstring +'</ul></div>';
+        this.EmailString+='<td width="'+ width +'%;"><ul style="font-size:12px">'+ this.fstring +'</ul></td>';
+        this.EmailString+='</tr></table>';
     }
 
     else {
@@ -231,26 +269,49 @@ Email.prototype.GenerateEmail = function(template) {
             '<p style="text-align:center;font-weight:bold">Learning Outcomes</p>'+
             '<ul style="font-size:12px">'+ this.fstring +'</ul></div>';
     }
-
     this.EmailString+='</div>';
 
     if(this.principles.length > 0 || this.practices.length > 0) {
 
-        this.EmailString+= '<!-- Principles & Practices --><div class="plzfloat" id="floats" style="width:600px;float:left;">';
+        this.EmailString+= '<!-- Principles & Practices --><div class="plzfloat" id="floats" style="width:600px;float:left;margin-bottom:10px">';
 
         //Add Blurb
-        this.EmailString+='<p style="text-align:left;font-style:italic">'+this.blurb+'</p>'
+        this.EmailString+='<p style="text-align:left;font-style:italic;margin-bottom:10px">'+this.blurb+'</p>'
 
-        //Add principles if any...
-        if(this.principles.length >0) {
-            this.EmailString+='<p style="text-align:center;font-weight:bold">Principles:</p>';
-            this.EmailString+='<ul style="font-size:12px">'+ this.principles +'</ul>';
+        if(template == "A" && this.principles.length > 0 && this.practices.length > 0) {
+
+            //Use Table only if template A and there are principles AND practices
+            this.EmailString+='<table width="100%">'+
+                '<tr valign="top">'+
+                    '<th width="50%" colspan="1" align="center" >Principles</th>'+
+                    '<th width="50%" colspan="1" align="center" >Practices</th>'+
+                '</tr>'+
+                '<tr valign="top">'+
+                    '<td width="50%" colspan="1" >'+
+                        '<ul style="font-size:12px">'+ this.principles +'</ul>'+
+                    '</td>'+
+                    '<td width="50%" colspan="1" >'+
+                        '<ul style="font-size:12px">'+ this.principles +'</ul>'+
+                    '</td>'+
+                '</tr>'+
+            '</table>';
+
         }
 
-        //Add practices if any...
-        if(this.practices.length >0) {
-            this.EmailString+='<p style="text-align:center;font-weight:bold">Practices:</p>';
-            this.EmailString+='<ul style="font-size:12px">'+ this.principles +'</ul>';
+        else {
+
+            //Add principles if any...
+            if(this.principles.length >0) {
+                this.EmailString+='<p style="text-align:center;font-weight:bold">Principles:</p>';
+                this.EmailString+='<ul style="font-size:12px">'+ this.principles +'</ul>';
+            }
+
+            //Add practices if any...
+            if(this.practices.length >0) {
+                this.EmailString+='<p style="text-align:center;font-weight:bold">Practices:</p>';
+                this.EmailString+='<ul style="font-size:12px">'+ this.principles +'</ul>';
+            }
+
         }
 
         this.EmailString+='</div>';
