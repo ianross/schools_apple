@@ -32,7 +32,7 @@ var ReportCheckBoxesImages = [];
 var ReportCheckBoxesCaption = [];
 
 var SelectedBackground = "E";
-var SelectedFont = "A";
+var SelectedFont = "C";
 var SelectedFontColour = "A";
 
 var SelectedPrinciples = [];
