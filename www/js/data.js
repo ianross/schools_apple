@@ -86,7 +86,7 @@ function PrepData() {
 
     $.mobile.allowCrossDomainPages = true;
 
-    uploadingPhoto();
+    loadingMessage("Preparing Data...");
 
     var tests = ["OutcomeOne", "OutcomeTwo", "OutcomeThree","OutcomeFour","OutcomeFive"]
     var outcomes = ReportOutcomes;
@@ -164,6 +164,7 @@ function TryUploadImages() {
         options.SendData = SendData;
         options.uuid = SendData.uuid;
         options.chunkedMode = false;
+
         var params = new Object();
         params.uuid = SendData.uuid;
 		params.email = SendData.email;
@@ -173,7 +174,6 @@ function TryUploadImages() {
 
         var ft = new FileTransfer();
         ft.upload(cImage, "http://ec2-23-22-186-167.compute-1.amazonaws.com/school/upload",UploadImageSuccess, UploadImageFail, options);
-        //ft.upload(cImage, "http://localhost:10080/school/upload",UploadImageSuccess, UploadImageFail, options);
     }
     else {
         uploadPhotoCB();
@@ -184,7 +184,7 @@ function TryUploadImages() {
 
 function TryUploadData() {
 
-    uploadingPhoto();
+    loadingMessage("Uploading Report Data...");
 
     var emailObj = new Email(SendData.title, SendData.date, SendData.images, SendData.captions, SendData.notes, SendData.followupexperience, SendData.evaluation, SendData.type, SendData.Background, SendData.Font, SendData.template, SendData.outcomes, SendData.FontColour, SendData.principles, SendData.practices);
     var emailString = emailObj.GenerateEmail(SendData.template);
@@ -195,6 +195,7 @@ function TryUploadData() {
     $.ajax({
         url: "http://ec2-23-22-186-167.compute-1.amazonaws.com/school/content",
         //url: "http://localhost:10080/school/content",
+        timeout: 10000,
         type: "POST",
         data: JSON.stringify({uuid: SendData.uuid, cc:SendData.cc, to:SendData.email, body: emailString}),
 
@@ -215,10 +216,27 @@ function TryUploadData() {
                 'Report Successfully Submitted',            // title
                 'Close'                  // buttonName
             );
-            //alert("Report Submitted");
+
         },
-        error: function(obj) {
+        error: function(x,t,m) {
             uploadPhotoCB();
+
+            if(t==="timeout") {
+                navigator.notification.alert(
+                    'Timed Out - The report failed to send to the server for emailing. Please ensure you have an active data connection and try again',  // message
+                    function() {},         // callback
+                    'Report Email Failed',            // title
+                    'Close'                  // buttonName
+                );
+            } else {
+                navigator.notification.alert(
+                    'An error has occurred. Please ensure your data connection is still active and try again.',  // message
+                    function() {},         // callback
+                    'Report Email Failed',            // title
+                    'Close'                  // buttonName
+                );
+            }
+
         }
     });
 }
@@ -243,14 +261,15 @@ function UploadImageSuccess(r) {
 
 
 function uploadingPhoto(){
-    $("body").append('<div class="modalWindow"/>');
-    $.mobile.showPageLoadingMsg();
+    $.blockUI({ message: '<h4><img src="./img/busy.gif" /> Uploading Image...</h4>' });
+}
+
+function loadingMessage(msg) {
+    $.blockUI({ message: '<h4><img src="./img/busy.gif" />'+ msg + '</h4>' });
 }
 
 function uploadPhotoCB(){
-    $(".modalWindow").remove();
-    $.mobile.hidePageLoadingMsg();
-
+    $.unblockUI();
 }
 
 

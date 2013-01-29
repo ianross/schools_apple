@@ -8,7 +8,8 @@
     <link rel="stylesheet"  href="css/themes/default/jquery.mobile.structure-1.1.1.min.css" />
     <link rel="stylesheet"  href="css/themes/default/summer.css" />
     <script src="js/jquery.js"></script>
-    <script src="js/jquery.mobile-1.1.1.js"></script>
+    <script src="js/jquery.mobile-1.1.1.min.js"></script>
+    <script src="js/jquery.blockUI.js"></script>
 
     <style>
         .center-wrapper {
@@ -629,7 +630,7 @@ function onChooseTermListStudentClick(e) {
 
 function onTemplateClick(template) {
 
-    uploadingPhoto();
+    $.blockUI({ message: '<h4><img src="./img/busy.gif" /> Loading Report Form...</h4>' });
 
     if(template == 'A') { Template = TemplateOne; ReportTemplate = "A"; }
     if(template == 'B') { Template = TemplateTwo; ReportTemplate = "B";}
@@ -1187,24 +1188,24 @@ function PracticesCheck(e) {
 
         <div data-role="collapsible" data-collapsed="true" data-theme = "b">
             <h3>My Class</h3>
-            <a id="Edit" href="#three" data-role="button">View Children</a>
-            <a id="Add" href="#two" data-role="button">Add Child</a>
-            <a id="Remove" href="#removestudent" data-role="button">Remove Child</a>
-            <a id="" href="#teachersemail" data-role="button">Teacher's Email</a>
+            <a style="text-shadow:none;font-weight:bold" id="Edit" href="#three" data-role="button">View Children</a>
+            <a style="text-shadow:none;font-weight:bold" id="Add" href="#two" data-role="button">Add Child</a>
+            <a style="text-shadow:none;font-weight:bold" id="Remove" href="#removestudent" data-role="button">Remove Child</a>
+            <a style="text-shadow:none;font-weight:bold" id="" href="#teachersemail" data-role="button">Teacher's Email</a>
         </div>
 
         <div data-role="collapsible" data-collapsed = "true" data-theme = "d">
             <h3>Capture Data</h3>
 
-            <a id="Image" href="#captureimage" data-role="button">Capture Picture</a>
-            <a id="Notes" href="#capturenotes" data-role="button">Write Observations</a>
+            <a style="text-shadow:none;font-weight:bold" id="Image" href="#captureimage" data-role="button">Capture Picture</a>
+            <a style="text-shadow:none;font-weight:bold" id="Notes" href="#capturenotes" data-role="button">Write Observations</a>
 
         </div>
 
         <div data-role="collapsible" data-collapsed = "true" data-theme = "a">
             <h3>Create Learning Story</h3>
 
-            <a onclick="onTermSelection('TermOne');" href="#ChooseStudentTerm"  data-role="button">Generate Learning Story</a>
+            <a style="text-shadow:none;font-weight:bold" onclick="onTermSelection('TermOne');" href="#ChooseStudentTerm"  data-role="button">Generate Learning Story</a>
 
         </div>
 
@@ -2141,7 +2142,7 @@ function PracticesCheck(e) {
         GenerateReportImageGrid();
         */
 
-        $.mobile.hidePageLoadingMsg();
+        $.unblockUI();
         var holder = $("#data-connection").text(checkConnection());
         $("#TRinput").val(Globals.teacher);
 
@@ -2149,7 +2150,7 @@ function PracticesCheck(e) {
 
 
     $('#ReportFill').bind('pagebeforeshow', function() {
-        $.mobile.showPageLoadingMsg();
+        $.blockUI({ message: '<h4><img src="./img/busy.gif" /> Loading Report Form...</h4>' });
         $("#TRinput").val(Globals.teacher);
     });
 
