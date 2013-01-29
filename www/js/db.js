@@ -50,6 +50,8 @@ var ReportType = "";
 var ReportOutcomes = [];
 var SendData = {};
 
+var isTest = false;
+
 var CaptionLoading = false;
 
 function errorHandler(transaction, error) {

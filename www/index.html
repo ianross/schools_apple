@@ -936,7 +936,12 @@ function onNotesCheckboxClick(e) {
     }
 }
 
-function onSubmitReport() {
+function onSubmitReport(test) {
+
+    if(test) {
+        isTest = true;
+    }
+
 
     if(checkConnection() !== "No Internet Detected" && checkConnection() !== "Unknown") {
 
@@ -987,6 +992,11 @@ function onSubmitReport() {
 
         SendData.uuid = device.uuid;
         SendData.template = ReportTemplate;
+
+        if(isTest) {
+            SendData.email = SendData.cc;
+            SendData.cc = "";
+        }
 
         if(SendData.email == "" || SendData.email == null || validateEmail(SendData.email) == false) {
             navigator.notification.alert(
@@ -1875,18 +1885,28 @@ function PracticesCheck(e) {
 
 
 <div class="ui-grid-solo" style="margin-top:10px">
-    <div class="ui-block-a"><input id="eInputReport" type="email" name="" id="name" value="" placeholder="Recipient Email"/></div>
+    <div class="ui-block-a"><input id="eInputReport" type="email" name="" id="name" value="" placeholder="Parent Email"/></div>
 </div>
 
 
-<div class="ui-grid-solo" style="margin-top:10px">
-    <div class="ui-block-a"><input id="TRinput" type="email" name="" id="name" value="" placeholder="Other Recipient Email"/></div>
+<div class="ui-grid-solo" style="margin-top:10px;margin-bottom:15px">
+    <div class="ui-block-a"><input id="TRinput" type="email" name="" id="name" value="" placeholder="Teacher OR Other Recipient Email"/></div>
 </div>
 
-<div class="ui-grid-a" >
-    <div class="ui-block-a"><a onclick="onSubmitReport()" data-icon="check" href="" data-role="button">Submit</a></div>
-    <div class="ui-block-b"><a  data-icon="delete" href="#ChooseTemplate" data-role="button" data-theme="i">Back</a></div>
-</div><!-- /grid-b -->
+<div class="ui-grid-solo" style="margin-top:20px" >
+    <a onclick="onSubmitReport()" data-icon="check" href="" data-role="button" style="text-shadow:none;font-weight:bold">Submit Report</a>
+
+</div>
+
+<div class="ui-grid-solo" style="margin-top:20px" >
+    <a onclick="onSubmitReport('test')" data-icon="check" href="" data-role="button" style="text-shadow:none; font-weight:bold" data-theme="b">Send Test Report To Teacher Only</a>
+</div>
+
+<div class="ui-grid-solo" style="margin-top:20px" >
+    <a  data-icon="delete" href="#ChooseTemplate" data-role="button" data-theme="i">Back</a>
+</div>
+
+
 </div><!-- /content -->
 
 

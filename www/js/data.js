@@ -206,8 +206,8 @@ function TryUploadData() {
             navigator.notification.alert(
                 'Report Submitted',  // message
                 function() {
-                    if(ReportTerm == 0 || ReportTerm == "Other" ) {
-
+                    if(ReportTerm == 0 || ReportTerm == "Other" || isTest == true ) {
+                        isTest = false;
                     }
                     else {
                         CallbackData = 1;
