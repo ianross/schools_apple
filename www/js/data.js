@@ -171,6 +171,7 @@ function TryUploadImages() {
 		params.name = options.fileName;
         options.params = params;
         options.chunkedMode = false;
+        options.timeout = 10000;
 
         var ft = new FileTransfer();
         ft.upload(cImage, "http://ec2-23-22-186-167.compute-1.amazonaws.com/school/upload",UploadImageSuccess, UploadImageFail, options);
