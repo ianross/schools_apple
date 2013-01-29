@@ -134,7 +134,7 @@ Email.prototype.GenerateEmail = function(template) {
                 '<body>' +
                     '<div style="width:600px;font-family:'+ this.font +';color:'+ this.fontcolour +';background-color:'+ this.background +';border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 2px solid #E8EDFF;display:table"> ' +
                         '<!-- Title Banner --> ' +
-                        '<div id="floats" class="plzfloat" style="width:600px;height:60px;float:left;color:black;text-align:center;">'+
+                        '<div style="width:600px;height:60px;float:left;color:black;text-align:center;">'+
 
                         '    <div id="floats" class="plzfloat" style="font-size:28px;width:600px;float:left;">'+ this.title +'</div> ' +
                         '    <div id="floats" class="plzfloat" style="width:600px;font-style:italic;float:left;margin-bottom:10px">'+ this.date +'</div> ' +
@@ -154,7 +154,7 @@ Email.prototype.GenerateEmail = function(template) {
             '<table width="100%">' +
                 '<tr valign="top">' +
                     '<td width="100%" colspan="1" align="center">' +
-                    '<img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;">' +
+                    '<img src="cid:1.jpg" width="193" height="200" style="border:none;">' +
                     '</td>' +
                 '</tr>' +
             '</table>' +
@@ -174,10 +174,10 @@ Email.prototype.GenerateEmail = function(template) {
             '<table width="100%">' +
                 '<tr valign="top">' +
                     '<td width="50%" colspan="1" align="center">' +
-                        '<img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;">' +
+                        '<img src="cid:1.jpg" width="193" height="200" style="border:none;">' +
                     '</td>' +
                     '<td width="50%" colspan="1" align="center">' +
-                        '<img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;">' +
+                        '<img src="cid:2.jpg" width="193" height="200" style="border:none;">' +
                     '</td>' +
                 '</tr>' +
             '</table>' +
@@ -198,13 +198,13 @@ Email.prototype.GenerateEmail = function(template) {
             '<table width="100%">' +
                 '<tr valign="top">' +
                     '<td width="30%" colspan="1" align="center">' +
-                        '<img src="cid:1.jpg" width="193" height="200" style="border:none;float:left;">' +
+                        '<img src="cid:1.jpg" width="193" height="200" style="border:none;">' +
                     '</td>' +
                     '<td width="30%" colspan="1" align="center">' +
-                        '<img src="cid:2.jpg" width="193" height="200" style="border:none;float:left;">' +
+                        '<img src="cid:2.jpg" width="193" height="200" style="border:none;">' +
                     '</td>' +
                     '<td width="30%" colspan="1" align="center">' +
-                        '<img src="cid:3.jpg" width="193" height="200" style="border:none;float:left;">' +
+                        '<img src="cid:3.jpg" width="193" height="200" style="border:none;">' +
                     '</td>' +
                 '</tr>' +
             '</table>' +
@@ -231,7 +231,6 @@ Email.prototype.GenerateEmail = function(template) {
         if(this.fnotes != "") {
             this.EmailString+='<th width="30%" colspan="1" align="center">Observations</th><th width="30%" colspan="1" align="center">Evaluation</th><th width="30%" colspan="1" align="center">Learning Outcomes</th></tr><tr valign="top">';
             this.EmailString+='<td width="30%" colspan="1" align="">'+
-                '<p style="text-align:center;font-weight:bold">Observations</p>'+
                 '<ul style="font-size:12px">'+ this.fnotes +'</ul></td>';
         }
         else {

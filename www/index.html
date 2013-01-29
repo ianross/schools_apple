@@ -51,8 +51,8 @@ function onDeviceReady() {
 
 function checkConnection() {
 
-    if(navigator.network) {
-    var networkState = navigator.network.connection.type;
+    if(navigator.connection) {
+    var networkState = navigator.connection.type;
 
     var states = {};
     states[Connection.UNKNOWN]  = 'Unknown';
@@ -431,12 +431,14 @@ function UpdateTeacherEmail() {
         AddTeacherEmail(teacherEmail);
     }
     else {
+        /*
         navigator.notification.alert(
                 'You must enter an email for the teacher',  // message
                 function() {},         // callback
                 'Teacher Email',            // title
                 'Close'                  // buttonName
         );
+        */
         //alert("You must enter an email for the teacher");
     }
 
