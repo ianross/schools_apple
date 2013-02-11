@@ -290,7 +290,7 @@ Email.prototype.GenerateEmail = function(template) {
                         '<ul style="font-size:12px">'+ this.principles +'</ul>'+
                     '</td>'+
                     '<td width="50%" colspan="1" >'+
-                        '<ul style="font-size:12px">'+ this.principles +'</ul>'+
+                        '<ul style="font-size:12px">'+ this.practices +'</ul>'+
                     '</td>'+
                 '</tr>'+
             '</table>';
@@ -308,7 +308,7 @@ Email.prototype.GenerateEmail = function(template) {
             //Add practices if any...
             if(this.practices.length >0) {
                 this.EmailString+='<p style="text-align:center;font-weight:bold">Practices:</p>';
-                this.EmailString+='<ul style="font-size:12px">'+ this.principles +'</ul>';
+                this.EmailString+='<ul style="font-size:12px">'+ this.practices +'</ul>';
             }
 
         }
