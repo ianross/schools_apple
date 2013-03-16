@@ -581,13 +581,13 @@ function ResetImages() {
     //Rebuild...
     for(var i=0;i< ReportImages.length;i++) {
             if(i==0) {
-                $('#image_one').text(ReportImages[i]);
+                $('#image_one').text('Photo One');
             }
             if(i==1) {
-                $('#image_two').text(ReportImages[i]);
+                $('#image_two').text('Photo Two');
             }
             if(i==2) {
-                $('#image_three').text(ReportImages[i]);
+                $('#image_three').text('Photo Three');
             }
     }
 }
@@ -1804,17 +1804,17 @@ function PracticesCheck(e) {
     </div>
 
     <div class="ui-grid-b" style="margin-top:20px">
-        <div id="image_one" class="ui-block-a" style="text-overflow:ellipsis;overflow:hidden;height:40px;line-height:40px">No Photo Attached</div>
-        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=0; if(ReportImages[0]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
-        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="if(ReportImages[0]) {removeImage(0);$.blockUI({ message: '<h4>Removing Image...</h4>'});}" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
+        <div id="image_one" class="ui-block-a" style="text-overflow:ellipsis;overflow:hidden;height:40px;line-height:40px">None</div>
+        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=0; if(ReportImages[0]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}else {navigator.notification.alert('Alert',function() {}, 'No photo to add caption for.','Close');}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
+        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="if(ReportImages[0]) {removeImage(0);$.blockUI({ message: '<h4>Removing Image...</h4>'});}else { navigator.notification.alert('Alert',function() {}, 'No photo to remove.','Close'); }" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
 
-        <div id="image_two" class="ui-block-a" style="text-overflow:ellipsis;height:40px;line-height:40px">No Photo Attached</div>
-        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=1; if(ReportImages[1]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
-        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="if(ReportImages[1]) {removeImage(1);$.blockUI({ message: '<h4>Removing Image...</h4>'});}" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
+        <div id="image_two" class="ui-block-a" style="text-overflow:ellipsis;height:40px;line-height:40px">None</div>
+        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=1; if(ReportImages[1]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}else {navigator.notification.alert('Alert',function() {}, 'No photo to add caption for.','Close');}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
+        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="if(ReportImages[1]) {removeImage(1);$.blockUI({ message: '<h4>Removing Image...</h4>'});}else { navigator.notification.alert('Alert',function() {}, 'No photo to remove.','Close'); }" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
 
-        <div id="image_three" class="ui-block-a" style="text-overflow:ellipsis;height:40px;line-height:40px">No Photo Attached</div>
-        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=2; if(ReportImages[2]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
-        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="if(ReportImages[2]) {removeImage(2);$.blockUI({ message: '<h4>Removing Image...</h4>'});}" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
+        <div id="image_three" class="ui-block-a" style="text-overflow:ellipsis;height:40px;line-height:40px">None</div>
+        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=2; if(ReportImages[2]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}else {navigator.notification.alert('Alert',function() {}, 'No photo to add caption for.','Close');}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
+        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="if(ReportImages[2]) {removeImage(2);$.blockUI({ message: '<h4>Removing Image...</h4>'});}else { navigator.notification.alert('Alert',function() {}, 'No photo to remove.','Close'); }" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
     </div><!-- /grid-b -->
 </div>
 
