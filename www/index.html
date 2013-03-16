@@ -26,6 +26,10 @@
             display: table;
             margin: 0 auto;
         }
+
+        .prev-selected {
+            background-color:"silver";
+        }
     </style>
 
 </head>
@@ -106,7 +110,7 @@ function GenerateList() {
 function GenerateEditList() {
 
     for(var i=0; i<Students.length; i++) {
-        var li = $("<li style='text-align:center; cursor:pointer;' data-theme='i' class='ui-li ui-li-static ui-body-i'>" + Students[i].name + "</li>");
+        var li = $("<li style='text-align:center; cursor:pointer;margin-top:10px;' data-theme='i' class='ui-li ui-li-static ui-body-i'>" + Students[i].name + "</li>");
         var ci = i;
         li[0].setAttribute('number',i);
         li[0].onclick = create(ci, EditStudent);
@@ -117,7 +121,7 @@ function GenerateEditList() {
 function GenerateDeleteList() {
 
     for(var i=0; i<Students.length; i++) {
-        var li = $("<li style='text-align:center; cursor:pointer;' data-theme='i' data-icon='delete' class='ui-li ui-li-static ui-body-i' >" + Students[i].name + "</li>");
+        var li = $("<li style='text-align:center; cursor:pointer;margin-top:10px;' data-theme='i' data-icon='delete' class='ui-li ui-li-static ui-body-i' >" + Students[i].name + "</li>");
         var ci = i;
         li[0].setAttribute('number',i);
         li[0].onclick = create(ci, RemoveStudent);
@@ -127,7 +131,7 @@ function GenerateDeleteList() {
 
 function GenerateCaptureImageList() {
     for(var i=0; i<Students.length; i++) {
-        var li = $("<li style='text-align:center; cursor:pointer;' data-theme='i' data-icon='delete' class='ui-li ui-li-static ui-body-i' >" + Students[i].name + "</li>");
+        var li = $("<li style='text-align:center; cursor:pointer;margin-top:10px;' data-theme='i' data-icon='delete' class='ui-li ui-li-static ui-body-i' >" + Students[i].name + "</li>");
         var ci = i;
         li[0].setAttribute('number',i);
         li[0].onclick = create(ci, InitCamera);
@@ -137,7 +141,7 @@ function GenerateCaptureImageList() {
 
 function GenerateCaptureNoteList() {
     for(var i=0; i<Students.length; i++) {
-        var li = $("<li style='text-align:center; cursor:pointer;' data-theme='i' data-icon='delete' class='ui-li ui-li-static ui-body-i' >" + Students[i].name + "</li>");
+        var li = $("<li style='text-align:center; cursor:pointer;margin-top:10px;' data-theme='i' data-icon='delete' class='ui-li ui-li-static ui-body-i' >" + Students[i].name + "</li>");
         var ci = i;
         li[0].setAttribute('number',i);
         li[0].onclick = create(ci, InitNotes);
@@ -525,20 +529,67 @@ function InitCamera(e) {
 }
 
 function StartCamera() {
-    if(navigator.camera){
-        navigator.camera.getPicture(onSuccess, onFail, { quality: 50, correctOrientation: true, destinationType: Camera.DestinationType.FILE_URI });
-    }
-    else {
-        onSuccess("img/thumb.jpg");
+    if(ReportImages.length < 3) {
+        if(navigator.camera){
+            //navigator.camera.getPicture(onSuccess, onFail, { quality: 50, correctOrientation: true, destinationType: Camera.DestinationType.FILE_URI });
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50, correctOrientation: true, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY});
+        }
     }
 }
 
 function onSuccess(imageURI) {
-    CallbackData = imageURI;
-    var arr = CurrentStudent.images.slice(0);
-    arr.push(imageURI);
-    UpdateStudentImagesInDB(CurrentStudent.name, PrepDBData(arr), PrepDBData(CurrentStudent.notes));
+    //CallbackData = imageURI;
+    //var arr = CurrentStudent.images.slice(0);
+    //arr.push(imageURI);
+    //UpdateStudentImagesInDB(CurrentStudent.name, PrepDBData(arr), PrepDBData(CurrentStudent.notes));
 
+    //Store File URI & Append...
+    ReportImages.push(imageURI);
+
+    //Rebuild...
+    ResetImages();
+}
+
+function removeImage(index) {
+
+    if(index == 0) { $('#image_one').text('No Photo Attached')}
+
+    if(index == 1) {$('#image_two').text('No Photo Attached')}
+
+    if(index == 2) {$('#image_three').text('No Photo Attached')}
+
+    //Fix array...
+    if(ReportImages[index]) {
+        ReportImages.splice(index, 1);
+    }
+    if(ReportImages[index]) {
+        ReportCaptions.splice(index,1);
+    }
+
+    ResetImages();
+
+    setTimeout(function() { $.unblockUI(); }, 200);
+
+}
+
+function ResetImages() {
+    //Set all to No Photo attached...
+    $('#image_one').text('No Photo Attached');
+    $('#image_two').text('No Photo Attached');
+    $('#image_three').text('No Photo Attached');
+
+    //Rebuild...
+    for(var i=0;i< ReportImages.length;i++) {
+            if(i==0) {
+                $('#image_one').text(ReportImages[i]);
+            }
+            if(i==1) {
+                $('#image_two').text(ReportImages[i]);
+            }
+            if(i==2) {
+                $('#image_three').text(ReportImages[i]);
+            }
+    }
 }
 
 function onFail(message) {
@@ -556,10 +607,10 @@ function GenerateChooseTermList() {
     if(ReportTerm) {
         for(var i=0; i<Students.length; i++) {
             if (Students[i][ReportTerm] == 0 || ReportTerm == "Other" ) {
-                var li = $('<li style="text-align:center; background-image:none; text-shadow:none; color:#f5f5f5; cursor:pointer;border-left:1px solid #AAA; border-right:1px solid #AAA; border-bottom:1px solid #AAA; background-color:#F62817" class="ui-li ui-li-static">' + Students[i].name + '</li>');
+                var li = $('<li style="text-align:center; background-image:none; text-shadow:none; color:#f5f5f5; cursor:pointer;border-left:1px solid #AAA; border-right:1px solid #AAA; border-bottom:1px solid #AAA; background-color:#F62817;margin-top:10px;" class="ui-li ui-li-static">' + Students[i].name + '</li>');
             }
             else {
-                var li = $('<li style="text-align:center; background-image:none; text-shadow:none; color:#f5f5f5; cursor:pointer;border-left:1px solid #AAA; border-right:1px solid #AAA; border-bottom:1px solid #AAA; background-color:#52D017" class="ui-li ui-li-static">' + Students[i].name + '</li>');
+                var li = $('<li style="text-align:center; background-image:none; text-shadow:none; color:#f5f5f5; cursor:pointer;border-left:1px solid #AAA; border-right:1px solid #AAA; border-bottom:1px solid #AAA; background-color:#52D017;margin-top:10px;" class="ui-li ui-li-static">' + Students[i].name + '</li>');
 
             }
             $(li)[0].onclick = onChooseTermListStudentClick;
@@ -615,15 +666,17 @@ function onChooseTermListStudentClick(e) {
 
     //Clear Notes
     ReportCheckBoxesNotes = [];
+    ReportCaptions = [];
     $('#ReportNotes').empty();
     GenerateReportNotes();
 
     //Clear Images
     ReportCheckBoxesCaption = [];
     ReportCheckBoxesImages = [];
-    $('#ReportImages').empty();
-    GenerateReportImageGrid();
-
+    ReportImages = [];
+    //$('#ReportImages').empty();
+    //GenerateReportImageGrid();
+    ResetImages();
 
     location.href = "#ChooseTemplate";
 }
@@ -643,12 +696,21 @@ function onTemplateClick(template) {
 function saveCaption (none) {
 
     CaptionLoading = false;
-
+/*
     if(none) { ReportCheckBoxesCaption.push("");}
     else {
         var text = $(document.getElementById('captiontext')).val();
         CurrentCaptionElement.setAttribute("caption",text);
         ReportCheckBoxesCaption.push(text);
+        $(document.getElementById('captiontext')).val('');
+    }
+*/
+   CaptionLoading = false;
+
+    if(none) { ReportCheckBoxesCaption[caption] = "";}
+    else {
+        var text = $(document.getElementById('captiontext')).val();
+        ReportCaptions[caption] = text;
         $(document.getElementById('captiontext')).val('');
     }
 }
@@ -820,6 +882,8 @@ function onImagesCheckboxClick(e) {
 
     if(CaptionLoading == false) {
 
+        loadingMessage("Loading...");
+
         var isChecked = this.li.getAttribute("checked");
 
         if(isChecked == "true") {
@@ -847,6 +911,8 @@ function onImagesCheckboxClick(e) {
                     ReportCheckBoxesCaption.push(listImages[i].getAttribute("caption"));
                 }
             }
+            uploadPhotoCB();
+
         }
         else {
             if(ReportCheckBoxesImages.length < Template.images) {
@@ -861,6 +927,8 @@ function onImagesCheckboxClick(e) {
 
                 ReportCheckBoxesImages.push(this.image);
                 location.href = "#addcaption";
+
+                uploadPhotoCB();
             }
         }
 
@@ -974,16 +1042,16 @@ function onSubmitReport(test) {
 
         SendData.title = title;
         SendData.date = date;
-        SendData.images = images.length;
-        SendData.captions = ReportCheckBoxesCaption;
+        SendData.images = ReportImages.length;
+        SendData.captions = ReportCaptions;
         SendData.notes = NOTES;
         SendData.email = email;
         SendData.cc = other;
         SendData.followupexperience = followup;
         SendData.evaluation = evaluation;
         SendData.type = ReportType;
-        SendData.imageData = images.slice(0);
-        SendData.captionData = ReportCheckBoxesCaption.slice(0);
+        SendData.imageData = ReportImages.slice(0);
+        SendData.captionData = ReportCaptions.slice(0);
         SendData.Background = SelectedBackground;
         SendData.Font = SelectedFont;
         SendData.FontColour = SelectedFontColour;
@@ -1036,6 +1104,7 @@ function onSubmitReport(test) {
     }
 
     else {
+
         navigator.notification.alert(
                 'No Internet Connection',  // message
                 function() {},         // callback
@@ -1207,7 +1276,7 @@ function PracticesCheck(e) {
         <div data-role="collapsible" data-collapsed = "true" data-theme = "d">
             <h3>Capture Data</h3>
 
-            <a style="text-shadow:none;font-weight:bold" id="Image" href="#captureimage" data-role="button">Capture Picture</a>
+            <!--<a style="text-shadow:none;font-weight:bold" id="Image" href="#captureimage" data-role="button">Capture Picture</a>-->
             <a style="text-shadow:none;font-weight:bold" id="Notes" href="#capturenotes" data-role="button">Write Observations</a>
 
         </div>
@@ -1314,7 +1383,7 @@ function PracticesCheck(e) {
 
 
         <div class="ui-grid-solo">
-            <input id="Sinput" type="text" name="name" id="basic" value=""  placeholder="Child Name" />
+            <input id="Sinput" type="text" name="name" id="basic" value=""  placeholder="Child's Name" />
         </div>
 
         <div class="ui-grid-solo">
@@ -1363,7 +1432,7 @@ function PracticesCheck(e) {
 <div data-role="page" id="four">
 
     <div data-role="header" data-theme="e">
-        <h1>View Child</h1>
+        <h1>View Child</h1><a data-role="button" data-icon="home" data-iconpos="notext" data-theme="i" data-inline="true" href="#one" data-icon="home"></a>
     </div>
 
     <div id="MainWindow" data-role="content">
@@ -1371,24 +1440,23 @@ function PracticesCheck(e) {
 
 
         <div data-role="collapsible" data-collapsed="true" data-theme = "a">
-            <h3>Change Child Name</h3>
+            <h3>Change Child's Name</h3>
 
             <fieldset class="ui-grid-a">
-                <div class="ui-block-a"><input id="NewNameInput" type="text" name="name" id="basic" value=""  placeholder="Child Name" /></div>
+                <div class="ui-block-a"><input id="NewNameInput" type="text" name="name" id="basic" value=""  placeholder="Child's Name" /></div>
                 <div class="ui-block-b"> <a style="margin-top:10px" onclick="EditChangeName()" data-mini="true" data-role="button" data-icon="check" data-inline="true" data-theme="i">Confirm</a></div>
 
             </fieldset>
 
         </div>
 
+        <!--
         <div data-role="collapsible" data-collapsed = "true" data-theme = "b">
             <h3>View Child Images</h3>
             <div id="StudentImages" class="ui-grid-b">
             </div>
         </div>
-
-
-
+        -->
         <div data-role="collapsible" data-collapsed = "true" data-theme = "c">
             <h3>View Child Observations</h3>
             <ul id="noteslist" data-role="listview" data-theme="b" style="margin-bottom:5px; margin-top: 5px">
@@ -1548,7 +1616,7 @@ function PracticesCheck(e) {
 
         <div class="ui-grid-a" style="margin-top:30px">
 
-            <div class="ui-block-a"><a onclick="submitNote()" data-icon="check" href="" data-role="button" data-theme="i">Add</a></div>
+            <div class="ui-block-a"><a onclick="submitNote()" data-icon="check" href="" data-role="button" data-theme="i">Save</a></div>
             <div class="ui-block-b"><a  data-icon="delete" href="#capturenotes" data-role="button" data-theme="i">Cancel</a></div>
         </div><!-- /grid-b -->
 
@@ -1573,8 +1641,8 @@ function PracticesCheck(e) {
         </div>
 
         <div class="ui-grid-a" >
-            <div class="ui-block-a"><a onclick="AttemptUpdateNote()" data-icon="check" href="" data-role="button">Update</a></div>
-            <div class="ui-block-b"><a onclick="AttemptDeleteNote()"  data-icon="delete" href="" data-role="button">Delete</a></div>
+            <div class="ui-block-a"><a onclick="AttemptUpdateNote()" data-theme="i" data-icon="check" href="" data-role="button">Update</a></div>
+            <div class="ui-block-b"><a onclick="AttemptDeleteNote()" data-theme="i"  data-icon="delete" href="" data-role="button">Delete</a></div>
         </div><!-- /grid-b -->
 
         <div class="ui-grid-b" style="margin-top:30px">
@@ -1670,7 +1738,7 @@ function PracticesCheck(e) {
 <div data-role="page" id="ChooseTemplate">
 
     <div data-role="header" data-theme="e">
-        <h1 style="white-space:normal">Learning Story Template</h1>
+        <h1 style="white-space:normal">Learning Story Template</h1><a data-role="button" data-icon="home" data-iconpos="notext" data-theme="i" data-inline="true" href="#one" data-icon="home"></a>
     </div>
 
     <div data-role="content">
@@ -1706,7 +1774,7 @@ function PracticesCheck(e) {
 <div data-role="page" id="ReportFill">
 
 <div data-role="header" data-theme="e">
-    <h1>Learning Story</h1>
+    <h1>Learning Story</h1><a data-role="button" data-icon="home" data-iconpos="notext" data-theme="i" data-inline="true" href="#one" data-icon="home"></a>
     <h5 id="data-connection" style="color:black; font-weight:normal;text-shadow:none;font-style:italic; font-size:10px"></h5>
 </div>
 
@@ -1730,7 +1798,23 @@ function PracticesCheck(e) {
 
 <div data-role="collapsible" data-collapsed = "true" data-theme = "b">
     <h3>Choose Images</h3>
-    <div id="ReportImages" class="ui-grid-b">
+
+    <div class="ui-grid-solo" style="margin-top:30px">
+        <div class="ui-block-a"><a style="text-shadow:none;font-weight:bold" onclick="" data-role="button" data-theme="i">Add Photo</a></div>
+    </div>
+
+    <div class="ui-grid-b" style="margin-top:20px">
+        <div id="image_one" class="ui-block-a" style="text-overflow:ellipsis;overflow:hidden;height:40px;line-height:40px">No Photo Attached</div>
+        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=0; if(ReportImages[0]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
+        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="removeImage(0);$.blockUI({ message: '<h4>Removing Image...</h4>'});" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
+
+        <div id="image_two" class="ui-block-a" style="text-overflow:ellipsis;height:40px;line-height:40px">No Photo Attached</div>
+        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=1; if(ReportImages[1]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
+        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="removeImage(1);$.blockUI({ message: '<h4>Removing Image...</h4>'});" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
+
+        <div id="image_three" class="ui-block-a" style="text-overflow:ellipsis;height:40px;line-height:40px">No Photo Attached</div>
+        <div class="ui-block-b"><a style="text-shadow:none;font-weight:bold" onclick="caption=2; if(ReportImages[2]) {$.blockUI({ message: '<h4>Loading Captions...</h4>'});location.href='#addcaption'}" data-role="button" data-mini="true" data-inline="true" data-theme="b">Caption</a></div>
+        <div class="ui-block-c" style="height:40px;"><a style="text-shadow:none;font-weight:bold" onclick="removeImage(2);$.blockUI({ message: '<h4>Removing Image...</h4>'});" data-role="button" data-mini="true" data-inline="true" data-theme="b" data-icon="delete" data-iconpos="notext"></a></div>
     </div><!-- /grid-b -->
 </div>
 
@@ -1746,7 +1830,7 @@ function PracticesCheck(e) {
 
 
     <div data-role="collapsible" data-collapsed = "true" data-theme = "d">
-        <h3>Early Years Learning Frameworks Outcomes</h3>
+        <h3>Early Years Learning Framework Outcomes</h3>
         <div data-role="collapsible-set">
             <div data-role="collapsible" data-collapsed = "true" data-theme = "c">
                 <h3 style="white-space:normal">Outcome One: Children have a strong sense of identity</h3>
@@ -1806,7 +1890,7 @@ function PracticesCheck(e) {
         </div>
     </div>
     <div data-role="collapsible" data-collapsed = "true" data-theme = "d">
-        <h3>ELYF Principles</h3>
+        <h3>EYLF Principles</h3>
         <div data-role="collapsible-set">
                 <input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" onclick="PrinciplesCheck(event)" />
                 <label for="checkbox-1">Secure, respectful and reciprocal relationships</label>
@@ -1826,7 +1910,7 @@ function PracticesCheck(e) {
         </div>
     </div>
     <div data-role="collapsible" data-collapsed = "true" data-theme = "d">
-        <h3>ELYF Practices</h3>
+        <h3>EYLF Practices</h3>
         <div data-role="collapsible-set">
                     <input type="checkbox" name="checkbox-a" id="checkbox-a" class="custom" onclick="PracticesCheck(event)" />
                     <label for="checkbox-a">Adopting holistic approaches</label>
@@ -1964,7 +2048,7 @@ function PracticesCheck(e) {
     <div data-role="content">
 
         <div class="ui-grid-solo">
-            <ul data-role="listview" data-theme="i" style="margin-top:5px">
+            <ul id="chooseFontList" data-role="listview" data-theme="i" style="margin-top:5px">
                 <li style="cursor:pointer" onclick="SelectedFont = 'A'; document.getElementById('fontClose').click();">
                     <a>
                         <h3 style="font-family:cursive">Cursive</h3>
@@ -2012,7 +2096,7 @@ function PracticesCheck(e) {
     <div data-role="content">
 
         <div class="ui-grid-solo">
-            <ul data-role="listview" data-theme="i" style="margin-top:5px">
+            <ul id="choosefontcolourlist" data-role="listview" data-theme="i" style="margin-top:5px">
                 <li style="cursor:pointer" onclick="SelectedFontColour = 'A';document.getElementById('colourClose').click();">
                     <a>
                         <h3 style="color:black">Black</h3>
@@ -2056,7 +2140,7 @@ function PracticesCheck(e) {
     <div data-role="content">
 
         <div class="ui-grid-solo">
-            <ul data-role="listview" data-theme="i" style="margin-top:5px">
+            <ul id="choosebackgroundlist" data-role="listview" data-theme="i" style="margin-top:5px">
                 <li onclick="SelectedBackground = 'A';document.getElementById('bgClose').click();">
                     <a>
                         <h3>Light Green</h3>
@@ -2161,11 +2245,14 @@ function PracticesCheck(e) {
         $('#ReportImages').empty();
         GenerateReportImageGrid();
         */
-
         $.unblockUI();
         var holder = $("#data-connection").text(checkConnection());
         $("#TRinput").val(Globals.teacher);
 
+    });
+
+    $('#addcaption').bind('pageshow', function() {
+        $.unblockUI();
     });
 
 
@@ -2175,6 +2262,27 @@ function PracticesCheck(e) {
     });
 
     $('#ReportFill').bind('pagebeforehide', function() {
+    });
+
+    $('#choosefont').bind('pagebeforeshow', function() {
+        var List = $('#chooseFontList')[0];
+        var selection = ['A','B','C','D','E'];
+        $("#chooseFontList >li>div").css('background-color','');
+        $($($(List).children()[selection.indexOf(SelectedFont)]).children()[0]).css('background-color','silver');
+    });
+
+    $('#choosefontcolour').bind('pagebeforeshow', function() {
+        var List = $('#choosefontcolourlist')[0];
+        var selection = ['A','B','C','D','E'];
+        $("#choosefontcolourlist >li>div").css('background-color','');
+        $($($(List).children()[selection.indexOf(SelectedFontColour)]).children()[0]).css('background-color','silver');
+    });
+
+    $('#choosebackground').bind('pagebeforeshow', function() {
+        var List = $('#choosebackgroundlist')[0];
+        var selection = ['A','B','C','D','E'];
+        $("#choosebackgroundlist >li>div").css('background-color','');
+        $($($(List).children()[selection.indexOf(SelectedBackground)]).children()[0]).css('background-color','silver');
     });
 
     $('#four').bind('pageinit', function() {

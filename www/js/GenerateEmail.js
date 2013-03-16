@@ -63,38 +63,41 @@ function Email(title,date,images,captions,notes,followupexperience,evaluation,ty
 
     for(var outcome in outcomes) {
 
-        var fstring = outcomes[outcome].Title;
+        var fstring = '<p><b>' + outcomes[outcome].Title + '</b></p>';
 
         for(var x in outcomes[outcome]) {
 
             if(x != "Title") {
 
                 if(outcomes[outcome][x].Descriptor) {
-                    fstring+= ' ' + outcomes[outcome][x].Descriptor + ' -';
+                    fstring+= ' <i> ' + outcomes[outcome][x].Descriptor + '</i></br></br>';
+                    fstring+= '' + 'The child:';
                 }
                 else {
-                    fstring+= ' ' + 'The child -';
+                    fstring+= '' + 'The child:';
                 }
+
+                fstring+= ' <ul style="font-size:12px; padding:0px 0px 0px 25px"> ';
 
                 for(var i=0;i<outcomes[outcome][x].Selections.length; i++) {
                     if(i == outcomes[outcome][x].Selections.length-1) {
-                        fstring+= ' ' + outcomes[outcome][x].Selections[i] + '. ';
+                        fstring+= ' <li>' + outcomes[outcome][x].Selections[i] + '</li> ';
                     }
                     else {
-                        fstring+= ' ' + outcomes[outcome][x].Selections[i] + ', ';
+                        fstring+= ' <li>' + outcomes[outcome][x].Selections[i] + '</li> ';
                     }
                 }
 
-                fstring+= '</br></br>'
-
+                fstring+= '</ul>';
             }
         }
         this.fstrings.push(fstring);
     }
 
     for(var i=0; i<this.fstrings.length;i++) {
-        this.fstring+='<li style="margin-left:1em;">' + this.fstrings[i] + '</li>';
+        this.fstring+='<div style="margin-left:1em; font-size:12px;margin-bottom:5px;">' + this.fstrings[i] + '</div>';
     }
+
 
     //EC etc etc
     this.type = type;
@@ -243,7 +246,7 @@ Email.prototype.GenerateEmail = function(template) {
             '<p style="font-size:12px">'+ this.follow +'</p>' +
             '</td>';
 
-        this.EmailString+='<td width="'+ width +'%;"><ul style="font-size:12px">'+ this.fstring +'</ul></td>';
+        this.EmailString+='<td width="'+ width +'%;">'+ this.fstring +'</td>';
         this.EmailString+='</tr></table>';
     }
 
@@ -266,7 +269,7 @@ Email.prototype.GenerateEmail = function(template) {
 
         this.EmailString+='<div id="floats" class="plzfloat" style="width:600px;float:left;margin-bottom:10px;">'+
             '<p style="text-align:center;font-weight:bold">Learning Outcomes</p>'+
-            '<ul style="font-size:12px">'+ this.fstring +'</ul></div>';
+            '<div style="font-size:12px">'+ this.fstring +'</div></div>';
     }
     this.EmailString+='</div>';
 

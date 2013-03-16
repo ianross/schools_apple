@@ -25,7 +25,8 @@ var Template = null;
 var ReportTitle = null;
 var ReportDate = null;
 var ReportNotes = null;
-var ReportImages = null;
+var ReportImages = [];
+var ReportCaptions = [];
 
 var ReportCheckBoxesNotes = [];
 var ReportCheckBoxesImages = [];
@@ -181,7 +182,7 @@ function updateNotesSuccess() {
     CurrentStudent.notes.push(CallbackData);
     Application.UpdateStudentNotes();
     CallbackData = null;
-    var Note = $('#textarea-a').val("");
+    $('#textarea-a').val("");
     location.href="#capturenotes";
 }
 
