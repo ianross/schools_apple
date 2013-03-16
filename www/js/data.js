@@ -155,8 +155,11 @@ function TryUploadImages() {
     if(SendData.imageData.length > 0) {
 
         uploadingPhoto();
-        var cImage = SendData.imageData.pop();
-        var cCaption = SendData.captionData.pop();
+        SendData.imageData.splice(0, 1);
+        //var cImage = SendData.imageData.pop();
+        //var cCaption = SendData.captionData.pop();
+        var cImage = SendData.imageData.splice(0, 1);
+        var cCaption = SendData.captionData.splice(0, 1);
         var options = new FileUploadOptions();
         options.fileKey="file";
         options.fileName=cImage.substr(cImage.lastIndexOf('/')+1);
@@ -187,7 +190,7 @@ function TryUploadData() {
 
     loadingMessage("Uploading Report Data...");
 
-    /* Fake Loads */
+    /* Fake Loads
     SendData.title = "Oh Hello";
     SendData.date = "09/04/11";
     SendData.images = 0;
@@ -206,6 +209,7 @@ function TryUploadData() {
     SendData.FontColour = SelectedFontColour;
     SendData.principles = [1,1,1,1,1];
     SendData.practices = [2,2,2,2,2,2];
+    */
 
     var emailObj = new Email(SendData.title, SendData.date, SendData.images, SendData.captions, SendData.notes, SendData.followupexperience, SendData.evaluation, SendData.type, SendData.Background, SendData.Font, SendData.template, SendData.outcomes, SendData.FontColour, SendData.principles, SendData.practices);
     var emailString = emailObj.GenerateEmail(SendData.template);

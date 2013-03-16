@@ -552,11 +552,11 @@ function onSuccess(imageURI) {
 
 function removeImage(index) {
 
-    if(index == 0) { $('#image_one').text('No Photo Attached')}
+    if(index == 0) { $('#image_one').text('No Photo')}
 
-    if(index == 1) {$('#image_two').text('No Photo Attached')}
+    if(index == 1) {$('#image_two').text('No Photo')}
 
-    if(index == 2) {$('#image_three').text('No Photo Attached')}
+    if(index == 2) {$('#image_three').text('No Photo')}
 
     //Fix array...
     if(ReportImages[index]) {
@@ -574,9 +574,9 @@ function removeImage(index) {
 
 function ResetImages() {
     //Set all to No Photo attached...
-    $('#image_one').text('No Photo Attached');
-    $('#image_two').text('No Photo Attached');
-    $('#image_three').text('No Photo Attached');
+    $('#image_one').text('No Photo');
+    $('#image_two').text('No Photo');
+    $('#image_three').text('No Photo');
 
     //Rebuild...
     for(var i=0;i< ReportImages.length;i++) {
