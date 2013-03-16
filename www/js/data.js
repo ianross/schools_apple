@@ -187,7 +187,7 @@ function TryUploadData() {
 
     loadingMessage("Uploading Report Data...");
 
-    /* Fake Loads */
+    /* Fake Loads 
     SendData.title = "Oh Hello";
     SendData.date = "09/04/11";
     SendData.images = 0;
@@ -206,7 +206,7 @@ function TryUploadData() {
     SendData.FontColour = SelectedFontColour;
     SendData.principles = [1,1,1,1,1];
     SendData.practices = [2,2,2,2,2,2];
-
+    +*/
     var emailObj = new Email(SendData.title, SendData.date, SendData.images, SendData.captions, SendData.notes, SendData.followupexperience, SendData.evaluation, SendData.type, SendData.Background, SendData.Font, SendData.template, SendData.outcomes, SendData.FontColour, SendData.principles, SendData.practices);
     var emailString = emailObj.GenerateEmail(SendData.template);
     if(SendData.cc == null) { SendData.cc = ""; }
