@@ -155,7 +155,6 @@ function TryUploadImages() {
     if(SendData.imageData.length > 0) {
 
         uploadingPhoto();
-        SendData.imageData.splice(0, 1);
         //var cImage = SendData.imageData.pop();
         //var cCaption = SendData.captionData.pop();
         var cImage = SendData.imageData.splice(0, 1);
