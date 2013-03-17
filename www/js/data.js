@@ -157,8 +157,8 @@ function TryUploadImages() {
         uploadingPhoto();
         //var cImage = SendData.imageData.pop();
         //var cCaption = SendData.captionData.pop();
-        var cImage = SendData.imageData.splice(0, 1);
-        var cCaption = SendData.captionData.splice(0, 1);
+        var cImage = SendData.imageData.splice(0, 1)[0];
+        var cCaption = SendData.captionData.splice(0, 1)[0];
         var options = new FileUploadOptions();
         options.fileKey="file";
         options.fileName=cImage.substr(cImage.lastIndexOf('/')+1);
